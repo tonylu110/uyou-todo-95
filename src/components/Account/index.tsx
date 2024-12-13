@@ -1,4 +1,4 @@
-import { Alert, Button, Input } from "@react95/core"
+import { Alert, Button, Input, TitleBar } from "@react95/core"
 import { useState } from "react"
 
 function Account() {
@@ -109,7 +109,13 @@ function Account() {
             </div>
             <Button onClick={login}>Login</Button>
 
-            {showAlert && <Alert title="ERROR" type={type} message={alertMsg} onClose={() => setShowAlert(false)} hasSound={true} buttons={[{
+            {showAlert && <Alert 
+              title="ERROR" 
+              type={type} 
+              message={alertMsg} 
+              titleBarOptions={[<TitleBar.Close key="close" onClick={() => setShowAlert(false)} />]}
+              hasSound={true} 
+              buttons={[{
               value: 'OK',
               onClick: () => setShowAlert(false)
             }]} />}

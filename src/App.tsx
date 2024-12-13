@@ -1,11 +1,8 @@
-import { Modal, TaskBar, List as List95 } from '@react95/core';
+import { Modal, TaskBar, List as List95, TitleBar } from '@react95/core';
 import { Access220, Signup, Computer } from '@react95/icons';
 import { useState } from 'react';
 import List from './components/List';
 import Account from './components/Account';
-
-import '@react95/core/GlobalStyle';
-import '@react95/core/themes/win95.css';
 
 function App() {
   const [window, setWindow] = useState(false)
@@ -21,14 +18,16 @@ function App() {
         <Modal 
           title="All ToDos" 
           icon={<Computer variant="16x16_4" />} 
-          onClose={() => setWindow(false)} 
           width="800px" 
           height="600px"
           overflow="auto"
-          defaultPosition={{
-            x: 100,
-            y: 50
+          dragOptions={{
+            defaultPosition: {
+              x: 0,
+              y: 20
+            }
           }}
+          titleBarOptions={[<TitleBar.Close key="close" onClick={() => setWindow(false)} />]} // <TitleBar.Minimize key="minimize" onClick={() => setWindow(false)} />
           menu={[{
             name: 'File',
             list: <List95 width="200px">
@@ -36,11 +35,20 @@ function App() {
                   </List95>
           }]}
         >
-          <List/>
+          <Modal.Content>
+            <List/>
+          </Modal.Content>
         </Modal>)}
       {showAcc && (
-        <Modal title="Account" onClose={() => setShowAcc(false)} width="300px" height="200px">
-          <Account/>
+        <Modal 
+          title="Account"
+          width="300px"
+          height="200px"
+          titleBarOptions={[<TitleBar.Close key="close" onClick={() => setShowAcc(false)} />]}
+        >
+          <Modal.Content>
+            <Account/>
+          </Modal.Content>
         </Modal>)}
       <TaskBar list={<List95>
         <List95.Item icon={<Access220 variant="32x32_4" />} onClick={() => setWindow(true)}>

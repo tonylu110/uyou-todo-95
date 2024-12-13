@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import 'virtual:uno.css'
 
+import '@react95/core/GlobalStyle';
+import '@react95/core/themes/win95.css';
+
 const localToDo = localStorage.getItem('todo')
 
 if (!localToDo) {
