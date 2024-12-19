@@ -8,6 +8,23 @@ function App() {
   const [window, setWindow] = useState(false)
   const [showAcc, setShowAcc] = useState(!localStorage.getItem('uid'))
 
+  const uid = localStorage.getItem('uid')
+  if (uid !== '' && uid !== null) {
+    fetch('https://api.todo.uyou.org.cn/gettodo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        uid,
+      }),
+    }).then((res) => {
+      return res.json()
+    }).then((res) => {
+      localStorage.setItem('ToDo', res.data)
+    })
+  }
+
   return (
     <div className="w-screen h-screen bg-#5aa">
       <div className="flex flex-col">
