@@ -21,7 +21,7 @@ function App() {
     }).then((res) => {
       return res.json()
     }).then((res) => {
-      localStorage.setItem('ToDo', res.data)
+      localStorage.setItem('todo', res.data)
     })
   }
 
