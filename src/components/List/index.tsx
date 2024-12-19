@@ -1,5 +1,6 @@
-import { Button, Checkbox, Frame, Input } from "@react95/core"
-import { useState } from "react"
+import { Button, Checkbox, Frame, Input } from '@react95/core'
+import { useState } from 'react'
+import setItem from '../../utils/setItem'
 
 export interface todo {
   text: string
@@ -15,9 +16,9 @@ function List() {
       if (list[i].id === id)
         list[i].ok = ok
     }
-    
+
     setList([...list])
-    localStorage.setItem('todo', JSON.stringify({data: list}))
+    setItem({ data: list })
   }
 
   const [text, setText] = useState('')
@@ -26,11 +27,11 @@ function List() {
     list.unshift({
       id: new Date().getTime(),
       text,
-      ok: false
+      ok: false,
     })
 
     setList([...list])
-    localStorage.setItem('todo', JSON.stringify({data: list}))
+    setItem({ data: list })
     setText('')
   }
 
@@ -41,19 +42,19 @@ function List() {
     }
 
     setList([...list])
-    localStorage.setItem('todo', JSON.stringify({data: list}))
+    setItem({ data: list })
   }
-  
+
   return (
     <div>
       <div className="flex mb-3">
-        <Input flex={1} mr="$10" value={text} onChange={(v) => setText(v.target.value)}/>
-        <Button onClick={() => add(text)} >+</Button>
+        <Input flex={1} mr="$10" value={text} onChange={v => setText(v.target.value)} />
+        <Button onClick={() => add(text)}>+</Button>
       </div>
-      {list.map((item) => (
-        <Frame key={item.id} bgColor='$material' w='100%' h='auto' boxShadow='$in' className='p-2 flex justify-between mb-3'>
+      {list.map(item => (
+        <Frame key={item.id} bgColor="$material" w="100%" h="auto" boxShadow="$in" className="p-2 flex justify-between mb-3">
           <div>
-            <Checkbox checked={item.ok} onChange={() => setOk(item.id, !item.ok)}/>
+            <Checkbox checked={item.ok} onChange={() => setOk(item.id, !item.ok)} />
             <span className={`${item.ok ? 'line-through' : ''}`}>{item.text}</span>
           </div>
           <Button onClick={() => del(item.id)}>delete</Button>
