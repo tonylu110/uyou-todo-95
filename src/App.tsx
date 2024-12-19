@@ -27,9 +27,15 @@ function App() {
 
   return (
     <div className="w-screen h-screen bg-#5aa">
-      <div className="flex flex-col">
-        <Access220 className="mt-8 ml-8" onClickCapture={() => setWindow(true)} />
-        <Signup className="mt-8 ml-8" onClickCapture={() => setShowAcc(true)} />
+      <div className="flex flex-col flex-gap-6 fixed top-7 left-7">
+        <div className="flex flex-col items-center">
+          <Access220 className="mb-1" onClickCapture={() => setWindow(true)} />
+          <span className="select-none">All ToDos</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <Signup className="mb-1" onClickCapture={() => setShowAcc(true)} />
+          <span className="select-none">Account</span>
+        </div>
       </div>
       {window && (
         <Modal
